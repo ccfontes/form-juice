@@ -1,5 +1,6 @@
 (ns form.juice
   (:require [clojure.string :as str]
+            [clojure.walk :refer [keywordize-keys]]
             [goog.dom :as gdom]
             [goog.string :as gstring]
             [goog.dom.forms :as gforms]))
@@ -43,4 +44,4 @@
   (gdom/getAncestorByTagNameAndClass btn "form"))
 
 (defn squeeze [event]
-  (-> event .-currentTarget parent-form form-data js->clj))
+  (-> event .-currentTarget parent-form form-data js->clj keywordize-keys))

@@ -31,20 +31,20 @@ Add the following to the `:dependencies` vector of your `project.clj` file:
 
 ### I'm thirsty!
 ----------
-First add `[cljs-ajax "0.2.6"]` to the `:dependencies` vector of your
-`project.clj` file.
-
-This is how I drink:
+Lets show an example:
 ```clojure
 (ns app.views.something
   (:require [hiccup.def :refer [defelem]]))
 
 (defelem some-form []
   [:form {:method "post" :action "/resource"}
+    ; you must name the input var 'event' below
     [:button {:type "submit" :onclick "app.something.post(event)"}
       "Submit"]])
 ```
 
+Add `[cljs-ajax "0.2.6"]` to the `:dependencies` vector of your
+`project.clj` file.
 ```clojure
 (ns app.something
   (:require form.juice
@@ -53,10 +53,16 @@ This is how I drink:
 (defn post [event]
   (.preventDefault event) ; prevents default event of form submission to fire
   (POST "/resource"
-    {:params (form.juice/squeeze event)
-     :handler (fn [_] (.log js/console "seiko shimashita! (*＾▽＾)／"))
-     :error-handler (fn [_] (.log js/console "fukaku shimashita ｡ﾟ(ﾟ´Д｀ﾟ)ﾟ｡"))
+    {:params (form.juice/squeeze event) ; tasty!
+     :handler (fn [_] (.log js/console "(*＾▽＾)／"))
+     :error-handler (fn [_] (.log js/console "｡ﾟ(ﾟ´Д｀ﾟ)ﾟ｡"))
      :format :raw}))
+```
+
+How the juice looks like at the REPL:
+```clojure
+(form.juice/squeeze event)
+;=> {:orange "juicy", :mandarin "tasty", :lemon "bitter", :grapefruit "gaah"}
 ```
 
 ### Why not join this list of limonades made from form-juice?

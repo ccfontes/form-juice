@@ -1,4 +1,4 @@
-(defproject form-juice "0.1.0"
+(defproject form-juice "0.2.0"
 
   :description "Data squeezed from juicy forms in ClojureScript"
 
